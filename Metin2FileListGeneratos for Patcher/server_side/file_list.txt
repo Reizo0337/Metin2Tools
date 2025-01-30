@@ -1,0 +1,15 @@
+dev\shop.cfg,e4c2e8edac362acab7123654b9e73432
+dev\switchbot.pkl,0914a310e04bf1df524bfa6144ab7ff1
+pack\Effect.epk,be1b208d96fc937e2d3755882c136892
+pack\ETC.eix,28b412e6e3b511a4973dd04f483b3d88
+pack\ETC.epk,d6c4f27abbdbd33665cbd73588ff3e61
+pack\guild.eix,3b324a0653d36c9dfeff3edbfe5b0046
+pack\guild.epk,38a12e964c73f12505b9c6afa4ce97bd
+Metin2Release.exe,eae52002a872d71499fbdb47c66a3457
+msvcp120.dll,fd5cabbe52272bd76007b68186ebaf00
+msvcp120d.dll,3049622a9a5bc219504e39aca1fb35d1
+msvcr90.dll,e7d91d008fe76423962b91c43c88e4eb
+msvcr100.dll,67ec459e42d3081dd8fd34356f7cafc1
+msvcr120.dll,034ccadc1c073e4216e9466b720f9849
+msvcr120d.dll,f67ca8d338dfd99e3c540336221f8fa7
+MSVCRTD.DLL,01c72cfcaaed3a7564e5b893b7712d28
