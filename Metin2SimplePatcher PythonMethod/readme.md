@@ -1,4 +1,4 @@
-<h1>Sapphire2 Game Launcher</h1>
+<h1>METIN2 Game Launcher</h1>
 
 <h2>Description</h2>
 <p>This is a custom game launcher for a private Metin2 server. The launcher checks for updates, downloads necessary files, and launches the game.</p>
