@@ -1,2 +1,2 @@
-# Metin2Tools
-Metin2Tools made by Reizo.
+<h1>Metin2Tools by [Reizo]</h1>
+<p>Metin2Tools is a collection of utilities developed by Reizo to enhance and simplify the management and development of private Metin2 servers. The tools included are designed to streamline server updates, patching processes, and other server-related tasks, helping server administrators and developers maintain and improve their Metin2 server experience with ease.</p>
