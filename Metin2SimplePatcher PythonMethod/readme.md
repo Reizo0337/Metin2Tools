@@ -1,7 +1,7 @@
 <h1>Sapphire2 Game Launcher</h1>
 
 <h2>Description</h2>
-<p>This is a custom game launcher for Sapphire2, a private Metin2 server. The launcher checks for updates, downloads necessary files, and launches the game.</p>
+<p>This is a custom game launcher for a private Metin2 server. The launcher checks for updates, downloads necessary files, and launches the game.</p>
 
 <h2>Features</h2>
 <ul>
@@ -61,4 +61,4 @@
 </ul>
 
 <h2>License</h2>
-<p>This project is for educational purposes and should not be used for unauthorized game modifications.</p>
+<p>This project is for educational purposes, is not made for LAST CUSTOMERS USING.</p>
