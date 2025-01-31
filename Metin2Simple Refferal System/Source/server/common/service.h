@@ -1,0 +1,10 @@
+service.h
+
+1. Add
+
+#define ENABLE_REFFERAL_SYSTEM
+#ifdef ENABLE_REFFERAL_SYSTEM
+	#define REFFERAL_REWARD_VNUM 10
+	#define REFFERAL_REWARD_COUNT 1
+#endif
+#endif
