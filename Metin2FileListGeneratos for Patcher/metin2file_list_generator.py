@@ -1,10 +1,11 @@
 import os
 import hashlib
+import subprocess
 import requests
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QFileDialog, QLabel
 
-SERVER_URL = "http://localhost/patcher/" 
-CLIENT_FOLDER = "Z:/SAPPHIRE2 - Rebellion of Kingdoms/Client/" 
+SERVER_URL = "http://localhost/patcher/"
+CLIENT_FOLDER = "Z:/SAPPHIRE2 - Rebellion of Kingdoms/Client/"
 SECRET_TOKEN = "REIZONR1"
 
 class FileUploader(QWidget):
@@ -19,9 +20,11 @@ class FileUploader(QWidget):
         self.label = QLabel("Select files to upload to the server", self)
         self.btn_select_files = QPushButton("Select Files", self)
         self.btn_upload_files = QPushButton("Upload Files", self)
+        self.btn_generate_patch = QPushButton("Generate Delta Patch", self)  # New button
 
         self.btn_select_files.clicked.connect(self.select_files)
         self.btn_upload_files.clicked.connect(self.upload_files)
+        self.btn_generate_patch.clicked.connect(self.generate_patch)  # New button action
 
         self.selected_files = []
 
@@ -29,6 +32,7 @@ class FileUploader(QWidget):
         layout.addWidget(self.label)
         layout.addWidget(self.btn_select_files)
         layout.addWidget(self.btn_upload_files)
+        layout.addWidget(self.btn_generate_patch)  # Add the new button to layout
         self.setLayout(layout)
 
     def select_files(self):
@@ -102,7 +106,6 @@ class FileUploader(QWidget):
             return []
 
     def upload_file_list(self, file_list_content):
-        """Sube el file_list.txt al servidor con autenticación."""
         try:
             headers = {
                 "Authorization": f"Bearer {SECRET_TOKEN}"
@@ -122,7 +125,6 @@ class FileUploader(QWidget):
             print(f"Error uploading file list: {str(e)}")
 
     def upload_single_file(self, file_path, folder_name):
-        """Sube un archivo individual al servidor con autenticación y en la carpeta correcta."""
         try:
             if not os.path.exists(file_path):
                 print(f"File not found: {os.path.basename(file_path)}")
@@ -155,7 +157,7 @@ class FileUploader(QWidget):
                         print(f"File uploaded successfully: {response.json()}")
                     except ValueError as e:
                         print(f"Error decoding JSON: {e}")
-                        print(f"Response content: {response.text}") 
+                        print(f"Response content: {response.text}")
                 else:
                     print(f"Failed to upload file: {relative_path}. Status code: {response.status_code} Response: {response.text}")
 
@@ -164,12 +166,43 @@ class FileUploader(QWidget):
         except Exception as e:
             print(f"Unexpected error uploading {os.path.basename(file_path)}: {str(e)}")
 
-
     def get_folder_name(self, relative_path):
         if os.path.basename(relative_path) == relative_path:
-            return '.' 
+            return '.'
         folder_name = os.path.dirname(relative_path)
         return folder_name
+
+    def generate_patch(self):
+        if len(self.selected_files) != 2:
+            self.label.setText("Please select exactly two files (original and updated).")
+            return
+
+        original_file = self.selected_files[0]
+        updated_file = self.selected_files[1]
+
+        try:
+            # Generate patch file name
+            patch_file = os.path.join(CLIENT_FOLDER, "patch.xdelta")
+
+            # Call xdelta3 to generate the patch
+            self.label.setText(f"Generating delta patch for {original_file} -> {updated_file}...")
+            self.create_xdelta_patch(original_file, updated_file, patch_file)
+
+            self.label.setText(f"Delta patch created successfully: {patch_file}")
+
+        except Exception as e:
+            self.label.setText(f"Error generating patch: {str(e)}")
+            print(f"Error generating patch: {str(e)}")
+
+    def create_xdelta_patch(self, original_file, updated_file, patch_file):
+        command = [
+            "xdelta3",  # Assuming xdelta3 is installed and available in PATH
+            "-e",       # Encoding (create a patch)
+            "-s", original_file,  # Source file (original)
+            updated_file,  # Target file (updated)
+            patch_file  # Output patch file
+        ]
+        subprocess.run(command, check=True)
 
 
 if __name__ == '__main__':
